@@ -1,9 +1,16 @@
 # library doc string
+'''
+Module containing helper functions.
 
+Author: Kimani Kibuthu
+
+'''
 
 # import libraries
-
-
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def import_data(pth):
@@ -15,7 +22,8 @@ def import_data(pth):
     output:
             df: pandas dataframe
     '''	
-	pass
+    data = pd.read_csv(pth)
+    return data
 
 
 def perform_eda(df):
@@ -27,7 +35,44 @@ def perform_eda(df):
     output:
             None
     '''
-	pass
+    # Check out the churn
+    df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if val == "Existing Customer" else 1)
+    plt.figure(figsize=(20,10)) 
+    df['Churn'].hist();
+    plt.xlabel('Churn')
+    plt.ylabel('Number of Customers')
+    plt.title('Churn Rate')
+    plt.savefig('./images/churn_rate.png')
+
+    # Customer age distribution
+    plt.figure(figsize=(20,10)) 
+    df['Customer_Age'].hist()
+    plt.xlabel('Customer Age')
+    plt.ylabel('Number of Customers')
+    plt.title('Customer Age Distribution')
+    plt.savefig('./images/customer_age_distribution.png')
+
+    # Marital Status
+    plt.figure(figsize=(20,10)) 
+    df.Marital_Status.value_counts('normalize').plot(kind='bar');
+    plt.xlabel('Marital Status')
+    plt.ylabel('Number of Customers')
+    plt.title('Customer Marital Status')
+    plt.savefig('./images/marital_status.png')
+
+    # Total Trans Count
+    plt.figure(figsize=(20,10)) 
+    sns.histplot(df['Total_Trans_Ct'], kde=True).set(title='Total Transaction Cost')
+    plt.savefig('./images/total_trans_ct.png')
+
+    # Heatmap
+    plt.figure(figsize=(20,10)) 
+    sns.heatmap(df.corr(), annot=True, cmap='Dark2_r', linewidths = 2).set(title='Heatmap')
+    plt.savefig('./images/heatmap.png')
+    
+
+
+
 
 
 def encoder_helper(df, category_lst, response):
