@@ -1,0 +1,7 @@
+root - ERROR - ERROR: Denominator cannot be zero
+root - INFO - SUCCESS: The fraction is true
+root - INFO - SUCCESS: The fraction is true
+root - INFO - SUCCESS: The fraction is true
+root - ERROR - ERROR: text not string
+root - INFO - SUCCESS: The length of the string is 5
+root - INFO - SUCCESS: The length of the string is 1
