@@ -11,7 +11,9 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 
 def import_data(pth):
@@ -23,8 +25,8 @@ def import_data(pth):
     output:
             df: pandas dataframe
     '''	
-    data = pd.read_csv(pth)
-    return data
+    df = pd.read_csv(pth)
+    return df
 
 
 def perform_eda(df):
@@ -146,7 +148,14 @@ def classification_report_image(y_train,
     output:
              None
     '''
-    pass
+    plt.rc('figure', figsize=(5, 5))
+    #plt.text(0.01, 0.05, str(model.summary()), {'fontsize': 12}) old approach
+    plt.text(0.01, 1.25, str('Random Forest Train'), {'fontsize': 10}, fontproperties = 'monospace')
+    plt.text(0.01, 0.05, str(classification_report(y_test, y_test_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+    plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10}, fontproperties = 'monospace')
+    plt.text(0.01, 0.7, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+    plt.axis('off');
+    plt.savefig('./images/classification.png')
 
 
 def feature_importance_plot(model, X_data, output_pth):
@@ -160,7 +169,27 @@ def feature_importance_plot(model, X_data, output_pth):
     output:
              None
     '''
-    
+    # Calculate feature importances
+    importances = model.feature_importances_
+    # Sort feature importances in descending order
+    indices = np.argsort(importances)[::-1]
+
+    # Rearrange feature names so they match the sorted feature importances
+    names = [X_data.columns[i] for i in indices]
+
+    # Create plot
+    plt.figure(figsize=(20,5))
+
+    # Create plot title
+    plt.title("Feature Importance")
+    plt.ylabel('Importance')
+
+    # Add bars
+    plt.bar(range(X_data.shape[1]), importances[indices])
+
+    # Add feature names as x-axis labels
+    plt.xticks(range(X_data.shape[1]), names, rotation=90)
+    plt.savefig(output_pth)
 
 def train_models(X_train, X_test, y_train, y_test):
     '''
