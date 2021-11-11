@@ -1,6 +1,6 @@
 import os
-import numpy as np
 import logging
+import numpy as np
 import churn_library as cls
 
 logging.basicConfig(
@@ -16,15 +16,15 @@ def test_import():
     """
 
     try:
-        df = cls.import_data("./data/bank_data.csv")
+        data = cls.import_data("./data/bank_data.csv")
         logging.info("Testing import_data: SUCCESS")
     except FileNotFoundError as err:
         logging.error("Testing import_eda: The file wasn't found")
         raise err
 
     try:
-        assert df.shape[0] > 0
-        assert df.shape[1] > 0
+        assert data.shape[0] > 0
+        assert data.shape[1] > 0
     except AssertionError as err:
         logging.error("Testing import_data: The file doesn't appear to have rows and columns")
         raise err
@@ -35,11 +35,11 @@ def test_eda():
     test perform eda function
     """
     try:
-        df = cls.import_data("./data/bank_data.csv")
-        cls.perform_eda(df)
+        data = cls.import_data("./data/bank_data.csv")
+        cls.perform_eda(data)
         logging.info("Performing EDA: SUCCESS")
     except KeyError as err:
-        logging.error("Performing EDA: A column stated was not found in the list of df columns")
+        logging.error("Performing EDA: A column stated was not found in the list of data columns")
         raise err
 
     try:
@@ -67,23 +67,23 @@ def test_encoder_helper():
     test encoder helper
     """
     try:
-        df = cls.import_data("./data/bank_data.csv")
-        cls.perform_eda(df)
+        data = cls.import_data("./data/bank_data.csv")
+        cls.perform_eda(data)
         cat_columns = ['Gender',
                        'Education_Level',
                        'Marital_Status',
                        'Income_Category',
                        'Card_Category']
-        new_df = cls.encoder_helper(df, cat_columns, 'Churn')
+        new_df = cls.encoder_helper(data, cat_columns, 'Churn')
         logging.info("Testing encoder_helper: SUCCESS")
 
     except KeyError as err:
-        logging.error("Testing encoder_helper: The columns not found in df")
+        logging.error("Testing encoder_helper: The columns not found in data")
         raise err
 
     try:
-        assert sum(df.isnull().sum()) == 0
-        assert len(new_df) > int(np.floor(0.7 * df.shape[0]))
+        assert sum(data.isnull().sum()) == 0
+        assert len(new_df) > int(np.floor(0.7 * data.shape[0]))
 
     except AssertionError as err:
         logging.error("Testing encoder_helper: The file doesn't input the column data correctly")
@@ -95,28 +95,28 @@ def test_perform_feature_engineering():
     test perform_feature_engineering
     """
     try:
-        df = cls.import_data("./data/bank_data.csv")
-        cls.perform_eda(df)
+        data = cls.import_data("./data/bank_data.csv")
+        cls.perform_eda(data)
         cat_columns = ['Gender',
                        'Education_Level',
                        'Marital_Status',
                        'Income_Category',
                        'Card_Category']
-        new_df = cls.encoder_helper(df, cat_columns, 'Churn')
+        new_df = cls.encoder_helper(data, cat_columns, 'Churn')
         x_train, x_test, y_train, y_test = cls.perform_feature_engineering(new_df, 'Churn')
         logging.info("Testing perform_feature_engineering: SUCCESS")
 
     except KeyError as err:
-        logging.error("Testing perform_feature_engineering: The columns not found in df")
+        logging.error("Testing perform_feature_engineering: The columns not found in data")
         raise err
 
     try:
-        assert x_train.shape[0] >= int(np.floor(0.7 * df.shape[0]))
-        assert x_test.shape[0] >= int(np.floor(0.3 * df.shape[0]))
+        assert x_train.shape[0] >= int(np.floor(0.7 * data.shape[0]))
+        assert x_test.shape[0] >= int(np.floor(0.3 * data.shape[0]))
         assert x_train.shape[1] == 19
         assert x_test.shape[1] == 19
-        assert y_train.shape[0] >= int(np.floor(0.7 * df.shape[0]))
-        assert y_test.shape[0] >= int(np.floor(0.3 * df.shape[0]))
+        assert y_train.shape[0] >= int(np.floor(0.7 * data.shape[0]))
+        assert y_test.shape[0] >= int(np.floor(0.3 * data.shape[0]))
 
     except AssertionError as err:
         logging.error("Testing perform_feature_engineering: The data is not split correctly")
@@ -128,16 +128,16 @@ def test_train_models():
     test train_models
     """
     try:
-        df = cls.import_data("./data/bank_data.csv")
-        df = cls.import_data("./data/bank_data.csv")
-        cls.perform_eda(df)
+        data = cls.import_data("./data/bank_data.csv")
+        data = cls.import_data("./data/bank_data.csv")
+        cls.perform_eda(data)
         cat_columns = ['Gender', 
                        'Education_Level',
                        'Marital_Status',
                        'Income_Category',
                        'Card_Category']
         
-        new_df = cls.encoder_helper(df, cat_columns, 'Churn')
+        new_df = cls.encoder_helper(data, cat_columns, 'Churn')
         x_train, x_test, y_train, y_test = cls.perform_feature_engineering(new_df, 'Churn')
         cls.train_models(x_train, x_test, y_train, y_test)
         logging.info("Testing train_models: SUCCESS")
