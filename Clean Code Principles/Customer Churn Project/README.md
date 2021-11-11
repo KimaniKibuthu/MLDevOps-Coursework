@@ -25,7 +25,7 @@ The repository contains several major files to achieve this goal. They include:
 
 ## Running the project
 In order to successfully run the project and obtain the intended results, follow the steps as shown below:
-* Run the churn_script_logging_and_test.py. This is by running the command `pytest churn_script_logging_and_test.py` in the terminal.
+* Run the churn_script_logging_and_tests.py. This is by running the command `pytest churn_script_logging_and_tests.py` in the terminal of an IDE such as pycharm or VS Code.
 * Once all the tests are passed, it means therefore that the functions in the churn_library.py are good to go. The data generated during the process of running the tests will be populated in the images folder, logs folder, and models folder.
 * Run the notebook to ensure reproducibility.
 
