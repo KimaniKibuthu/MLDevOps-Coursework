@@ -14,7 +14,7 @@ The repository contains several major files to achieve this goal. They include:
 
 * models folder - It contains the two models used in modeling the data.
 
-* logs folder = It contains the log created during the testing of the helper functions
+* logs folder - It contains the log created during the testing of the helper functions
 
 * churn_library.py - It contains helper functions that are used in the notebook.
 
