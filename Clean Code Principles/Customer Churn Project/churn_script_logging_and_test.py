@@ -69,7 +69,11 @@ def test_encoder_helper():
     try:
         df = cls.import_data("./data/bank_data.csv")
         cls.perform_eda(df)
-        cat_columns = ['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category']
+        cat_columns = ['Gender',
+                       'Education_Level',
+                       'Marital_Status',
+                       'Income_Category',
+                       'Card_Category']
         new_df = cls.encoder_helper(df, cat_columns, 'Churn')
         logging.info("Testing encoder_helper: SUCCESS")
 
@@ -93,7 +97,11 @@ def test_perform_feature_engineering():
     try:
         df = cls.import_data("./data/bank_data.csv")
         cls.perform_eda(df)
-        cat_columns = ['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category']
+        cat_columns = ['Gender',
+                       'Education_Level',
+                       'Marital_Status',
+                       'Income_Category',
+                       'Card_Category']
         new_df = cls.encoder_helper(df, cat_columns, 'Churn')
         x_train, x_test, y_train, y_test = cls.perform_feature_engineering(new_df, 'Churn')
         logging.info("Testing perform_feature_engineering: SUCCESS")
@@ -123,7 +131,12 @@ def test_train_models():
         df = cls.import_data("./data/bank_data.csv")
         df = cls.import_data("./data/bank_data.csv")
         cls.perform_eda(df)
-        cat_columns = ['Gender', 'Education_Level', 'Marital_Status', 'Income_Category', 'Card_Category']
+        cat_columns = ['Gender', 
+                       'Education_Level',
+                       'Marital_Status',
+                       'Income_Category',
+                       'Card_Category']
+        
         new_df = cls.encoder_helper(df, cat_columns, 'Churn')
         x_train, x_test, y_train, y_test = cls.perform_feature_engineering(new_df, 'Churn')
         cls.train_models(x_train, x_test, y_train, y_test)

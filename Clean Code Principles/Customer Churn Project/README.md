@@ -1,12 +1,13 @@
 # Predict Customer Churn
 
+## Introduction
+
 - Project **Predict Customer Churn** of ML DevOps Engineer Nanodegree Udacity
 
 ## Project Description
 The project entails predicting the customer churn of a bank. 
 
-## Running Files
-The repository contains several major files:
+The repository contains several major files to achieve this goal. They include:
 * data folder - Contains the data on customer churn.
 
 * images folder - It contains the eda and results folders. Once the notebook is run, it will generate plots during data exploration which will be saved in the eda folder. During the modelling section, it will generate images of feature importance and model performance plots that will be saved in the results folder.
@@ -22,7 +23,11 @@ The repository contains several major files:
 * churn_script_logging_and_test.py - It contains the tests on the helper functions in churn_library.py. Once run, it will fill the churn_library.log in the logs.
 
 
-
+## Running the project
+In order to successfully run the project and obtain the intended results, follow the steps as shown below:
+* Run the churn_script_logging_and_test.py. This is by running the command `pytest churn_script_logging_and_test.py` in the terminal.
+* Once all the tests are passed, it means therefore that the functions in the churn_library.py are good to go. The data generated during the process of running the tests will be populated in the images folder, logs folder, and models folder.
+* Run the notebook to ensure reproducibility.
 
 
 
