@@ -20,7 +20,7 @@ The repository contains several major files to achieve this goal. They include:
 
 * churn_notebook.py - It contains the processes of data processing and modelling on the customer churn data.
 
-* churn_script_logging_and_test.py - It contains the tests on the helper functions in churn_library.py. Once run, it will fill the churn_library.log in the logs.
+* churn_script_logging_and_tests.py - It contains the tests on the helper functions in churn_library.py. Once run, it will fill the churn_library.log in the logs.
 
 
 ## Running the project
